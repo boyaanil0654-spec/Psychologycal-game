@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognitive Puzzle | Mind Analysis Game</title>
+    <meta name="description" content="Psychological puzzle game that reveals your thinking patterns">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="neural-loader">
+            <div class="neural-node" style="top: 30%; left: 30%; animation-delay: 0s;"></div>
+            <div class="neural-node" style="top: 70%; left: 30%; animation-delay: 0.3s;"></div>
+            <div class="neural-node" style="top: 30%; left: 70%; animation-delay: 0.6s;"></div>
+            <div class="neural-node" style="top: 70%; left: 70%; animation-delay: 0.9s;"></div>
+            <div class="neural-node" style="top: 50%; left: 50%; animation-delay: 1.2s;"></div>
+        </div>
+        <div class="loading-text">
+            <h2>Initializing Cognitive Engine</h2>
+            <p>Analyzing neural pathways...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                    <span>CognitivePuzzle</span>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+                <a href="#game" class="nav-link"><i class="fas fa-gamepad"></i> Play</a>
+                <a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> About</a>
+                <a href="#analysis" class="nav-link"><i class="fas fa-chart-line"></i> Analysis</a>
+            </div>
+            <div class="nav-actions">
+                <button id="theme-toggle" class="btn-icon">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="sound-toggle" class="btn-icon">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="gradient-text">Discover</span> Your Mind
+                    </h1>
+                    <p class="hero-subtitle">
+                        Every puzzle is a mirror. Every solution reveals what your conscious mind hides.
+                        Uncover your cognitive patterns, biases, and unique thinking style.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-puzzle-piece"></i></div>
+                            <div class="stat-number" id="puzzle-count">7</div>
+                            <div class="stat-label">Psychological Puzzles</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-users"></i></div>
+                            <div class="stat-number" id="player-count">1,234</div>
+                            <div class="stat-label">Minds Analyzed</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-brain"></i></div>
+                            <div class="stat-number" id="bias-count">24</div>
+                            <div class="stat-label">Biases Detected</div>
+                        </div>
+                    </div>
+                    <div class="hero-actions">
+                        <button id="start-game" class="btn-primary btn-large">
+                            <i class="fas fa-play"></i> Start Your Analysis
+                        </button>
+                        <button id="watch-demo" class="btn-secondary btn-large">
+                            <i class="fas fa-play-circle"></i> Watch Demo
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <canvas id="neural-canvas"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Section -->
+        <section id="game" class="section">
+            <div class="game-container">
+                <div class="game-header">
+                    <h2><i class="fas fa-maze"></i> Ego Labyrinth</h2>
+                    <p>Navigate the maze. Your choices reveal your thinking patterns.</p>
+                </div>
+                
+                <div class="game-area">
+                    <div class="game-sidebar">
+                        <div class="game-stats">
+                            <h3>Cognitive Tracker</h3>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <span class="stat-label">Moves:</span>
+                                    <span class="stat-value" id="move-count">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Time:</span>
+                                    <span class="stat-value" id="time-count">0s</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Decisions:</span>
+                                    <span class="stat-value" id="decision-count">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Efficiency:</span>
+                                    <span class="stat-value" id="efficiency-score">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="controls">
+                            <h3>Controls</h3>
+                            <div class="control-buttons">
+                                <button class="control-btn" data-direction="up">
+                                    <i class="fas fa-arrow-up"></i> Up
+                                </button>
+                                <div class="horizontal-controls">
+                                    <button class="control-btn" data-direction="left">
+                                        <i class="fas fa-arrow-left"></i> Left
+                                    </button>
+                                    <button class="control-btn" data-direction="down">
+                                        <i class="fas fa-arrow-down"></i> Down
+                                    </button>
+                                    <button class="control-btn" data-direction="right">
+                                        <i class="fas fa-arrow-right"></i> Right
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="game-actions">
+                                <button id="reset-game" class="btn-secondary">
+                                    <i class="fas fa-redo"></i> Reset
+                                </button>
+                                <button id="hint-btn" class="btn-secondary">
+                                    <i class="fas fa-lightbulb"></i> Hint
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-main">
+                        <canvas id="maze-canvas" width="600" height="600"></canvas>
+                        <div class="game-hints">
+                            <div id="hint-text" class="hint-text">
+                                Use arrow keys or buttons to navigate. Find the green exit.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analysis Section -->
+        <section id="analysis" class="section">
+            <div class="analysis-container">
+                <div class="analysis-header">
+                    <h2><i class="fas fa-chart-bar"></i> Your Cognitive Profile</h2>
+                    <p>Based on your gameplay behavior</p>
+                </div>
+                
+                <div id="analysis-content" class="analysis-content">
+                    <div class="placeholder-analysis">
+                        <div class="placeholder-icon">
+                            <i class="fas fa-user-clock"></i>
+                        </div>
+                        <h3>Complete a Puzzle First</h3>
+                        <p>Play the Ego Labyrinth to generate your cognitive profile.</p>
+                        <button id="go-to-game" class="btn-primary">
+                            <i class="fas fa-gamepad"></i> Play Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="about-container">
+                <h2><i class="fas fa-info-circle"></i> About Cognitive Puzzle</h2>
+                <div class="about-content">
+                    <div class="about-card">
+                        <div class="about-icon"><i class="fas fa-brain"></i></div>
+                        <h3>The Science</h3>
+                        <p>Our puzzles are designed based on cognitive psychology research. Each game measures specific thinking patterns and decision-making styles.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Privacy First</h3>
+                        <p>Your cognitive data is anonymous and encrypted. We never share personal information or sell your data.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <h3>Learn & Grow</h3>
+                        <p>Understand your cognitive biases and improve your decision-making skills through personalized insights.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <i class="fas fa-brain"></i> CognitivePuzzle
+            </div>
+            <div class="footer-links">
+                <a href="#privacy">Privacy</a>
+                <a href="#terms">Terms</a>
+                <a href="#contact">Contact</a>
+                <a href="#github">GitHub</a>
+            </div>
+            <div class="footer-copyright">
+                &copy; 2024 Cognitive Puzzle. All psychological insights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="js/neural-loader.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/cognitive.js"></script>
+</body>
+</html>
