@@ -1,0 +1,36 @@
+{
+  "name": "cognitive-puzzle",
+  "version": "1.0.0",
+  "description": "Psychological puzzle game that analyzes thinking patterns",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "psychology",
+    "puzzle",
+    "game",
+    "cognitive",
+    "analysis"
+  ],
+  "author": "Cognitive Puzzle Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.0.0",
+    "compression": "^1.7.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/boyaanil0654-spec/Puzzle.git"
+  }
+}
